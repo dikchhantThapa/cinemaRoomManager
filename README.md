@@ -10,9 +10,9 @@ The objective of this program is to first read two positive integer numbers that
 
 ## Example 
 Enter the number of rows:
-> 7
+>7
 Enter the number of seats in each row:
-> 7
+>7
 
 1. Show the seats
 2. Buy a ticket
