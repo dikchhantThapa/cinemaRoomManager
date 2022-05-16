@@ -5,7 +5,6 @@ import java.util.Scanner;
 
 public class Cinema {
     public static Scanner scanner = new Scanner(System.in);
-
     public static void main(String[] args) {
 
         System.out.println("Enter the number of rows: ");
@@ -16,17 +15,15 @@ public class Cinema {
         System.out.print("> ");
         int seats = scanner.nextInt();
 
-
         char[][] seatingChart = new char[rows][seats];
         for (char[] row: seatingChart) {
             Arrays.fill(row, 'S');
         }
 
-
         int ticketsPurchased = 0;
         int currentIncome = 0;
 
-        // menu
+        // Display Menu
         while(true) {
             System.out.println();
             System.out.println("1. Show the seats");
@@ -50,10 +47,9 @@ public class Cinema {
             }
         }
 
-
     }
 
-    // menu Option 1. Show the seats
+    // Menu Option 1. Show the seats
     public static void printCinema (char[][] seatingChart) {
 
         System.out.println("Cinema:");
@@ -73,7 +69,7 @@ public class Cinema {
         System.out.println();
     }
 
-    // menu option 2. Buy a ticket
+    // Menu option 2. Buy a ticket
     public static int purchaseTicket (int rows, int seats, char[][] seatingChart) {
 
         System.out.println("Enter a row number: ");
@@ -84,12 +80,19 @@ public class Cinema {
         System.out.print("> ");
         int ticketSeat = scanner.nextInt();
 
+        // if array out of range/array exception occurs, restart purchaseTicket method again. Otherwise continue
         if (ticketRow <= 0 || ticketRow > rows || ticketSeat <= 0 || ticketSeat > seats) {
             System.out.println("Wrong input!");
             System.out.println();
             purchaseTicket(rows, seats, seatingChart);
+        }   else if (seatingChart[ticketRow - 1][ticketSeat - 1] == 'B') {
+            System.out.println("That ticket has already been purchased!");
+            System.out.println();
+            purchaseTicket(rows, seats, seatingChart);
+        }   else {
+            seatingChart[ticketRow - 1][ticketSeat - 1] = 'B';
+            // change the index of User's ticket seat to 'B' and save it
         }
-        // if array exception, just go to purchaseTicket method again otherwise continue
 
         int priceOfTicket;
         if (rows * seats <= 60 || ticketRow <= rows / 2) {
@@ -97,15 +100,11 @@ public class Cinema {
         }   else {
             priceOfTicket = 8;
         }
-
         System.out.println("Ticket price: $" + priceOfTicket);
-        seatingChart[ticketRow - 1][ticketSeat - 1] = 'B';
-        // we just change the index of User's ticket seat to 'B' and save it
-
         return priceOfTicket;
     }
 
-    // menu option 3. Statistics
+    // Menu option 3. Statistics
     public static void statistics (int rows, int seats, int ticketsPurchased, int currentIncome, int totalIncome) {
 
         System.out.println("Number of purchased tickets: " + ticketsPurchased);
@@ -114,14 +113,11 @@ public class Cinema {
         double totalSeatsInPercentage = (ticketsPurchased / totalSeats) * 100;
 
         System.out.printf("Percentage: %.2f%% %n", totalSeatsInPercentage);
-
         System.out.println("Current income: $" + currentIncome);
-
         System.out.println("Total income: $" + totalIncome);
-
     }
 
-    // total Income for Statistics output method
+    // Calculating total Income to display in Menu option 3.
     public static int totalIncome (int rows, int seats) {
 
         int totalSeats = rows * seats;
@@ -134,14 +130,12 @@ public class Cinema {
             int remainder = rows % 2;
             int backHalfRows = frontHalfRows + remainder;
 
-            int frontHalfPrice = frontHalfRows * 10;
-            int backHalfPrice = backHalfRows * 8;
+            int frontHalfPrice = frontHalfRows * seats * 10;
+            int backHalfPrice = backHalfRows * seats * 8;
 
             totalPrice = frontHalfPrice + backHalfPrice;
         }
-
         return totalPrice;
-
     }
 
 }
