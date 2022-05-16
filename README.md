@@ -14,7 +14,7 @@ The objective of this program is to first read two positive integer numbers that
 - **0. Exit** - exit the program 
 
 
- ### Extras
+ ### Extras/Edge cases
  - **Buy a ticket** shouldn't allow a user to buy a ticket that has already been purchased.
  - If a user chooses an already taken seat, print **That ticket has already been purchased!** and ask them to enter different seat coordinates until they pick an available seat. 
  - If coordinates out of bounds are picked, print **Wrong input!** and ask to enter different seat coordinates until the user picks an available seat.
